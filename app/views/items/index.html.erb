@@ -1,3 +1,10 @@
+<%= form_for(@new_item) do |f| %>
+  <%# f.label :name, "Item name" %>
+  <%= f.text_field :name, placeholder: "Item name" %>
+
+  <%= f.submit "Add" %>
+<% end %>
+
 <ul>
   <% @items.each do |item| %>
     <li><%= item.name %></li>
