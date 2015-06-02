@@ -18,4 +18,32 @@ RSpec.describe ItemsController, :type => :controller do
       expect(assigns(:items)).to eq(@items)
     end
   end
+
+  describe "#create" do
+    context "when valid attributes provided" do
+      it "creates new Item" do
+        expect {
+          item_attributes = { name: "Sample Item" }
+          post :create, item: item_attributes
+        }.to change(Item, :count).by(1)
+      end
+    end
+
+    context "when invalid attributes provided" do
+      it "doesnt create any Item" do
+        expect {
+          item_attributes = { name: "" }
+          post :create, item: item_attributes
+        }.to change(Item, :count).by(0)
+      end
+
+      it "renders page indicating errors" do
+        item_attributes = { name: "" }
+        post :create, item: item_attributes
+
+        expect(assigns(:new_item)).to be_invalid
+        expect(assigns(:new_item).errors.keys).to include(:name)
+      end
+    end
+  end
 end
