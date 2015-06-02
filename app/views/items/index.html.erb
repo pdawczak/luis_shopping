@@ -2,6 +2,12 @@
   <%# f.label :name, "Item name" %>
   <%= f.text_field :name, placeholder: "Item name" %>
 
+  <% if @new_item.invalid? %>
+    <% @new_item.errors.each do |field, error| %>
+      <%= error %>
+    <% end %>
+  <% end %>
+
   <%= f.submit "Add" %>
 <% end %>
 

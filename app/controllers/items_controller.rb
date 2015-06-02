@@ -5,8 +5,14 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.create(new_item_params)
-    redirect_to items_path
+    @items = Item.all
+    @new_item = Item.new(new_item_params)
+
+    if @new_item.save
+      redirect_to items_path
+    else
+      render :index
+    end
   end
 
   private
